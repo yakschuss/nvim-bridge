@@ -35,13 +35,13 @@ Then restart Claude Code.
 Start Neovim with a socket (any unique name works):
 
 ```bash
-nvim --listen /tmp/nvim-$$.sock myfile.py
+nvim --listen /tmp/nvim-$USER.sock myfile.py
 ```
 
 Or add an alias to your shell config:
 
 ```bash
-alias vim='nvim --listen /tmp/nvim-$$.sock'
+alias vim='rm -f /tmp/nvim-$USER.sock 2>/dev/null; nvim --listen /tmp/nvim-$USER.sock'
 ```
 
 The first nvim you open automatically becomes the "paired" instance. Claude's edits appear there.
