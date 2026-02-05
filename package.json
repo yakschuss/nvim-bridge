@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jschuss/nvim-bridge.git"
+    "url": "https://github.com/yakschuss/nvim-bridge.git"
   },
   "keywords": [
     "mcp",

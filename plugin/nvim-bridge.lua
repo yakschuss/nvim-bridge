@@ -1,5 +1,5 @@
 -- nvim-bridge: Claude Code <-> Neovim integration
--- https://github.com/jschuss/nvim-bridge
+-- https://github.com/yakschuss/nvim-bridge
 --
 -- Commands:
 --   :ClaudePair    - Make this nvim receive Claude's edits

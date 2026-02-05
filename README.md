@@ -25,7 +25,7 @@ Bidirectional bridge between [Claude Code](https://claude.ai/claude-code) and Ne
 ## Install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/jschuss/nvim-bridge/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/yakschuss/nvim-bridge/main/install.sh | bash
 ```
 
 Then restart Claude Code.

@@ -22,7 +22,7 @@ if [ -d "$INSTALL_DIR" ]; then
   git pull --quiet
 else
   echo "Cloning nvim-bridge..."
-  git clone --quiet https://github.com/jschuss/nvim-bridge.git "$INSTALL_DIR"
+  git clone --quiet https://github.com/yakschuss/nvim-bridge.git "$INSTALL_DIR"
   cd "$INSTALL_DIR"
 fi
 
