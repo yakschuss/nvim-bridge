@@ -2,6 +2,17 @@
 
 Bidirectional bridge between [Claude Code](https://claude.ai/claude-code) and Neovim. Every file Claude edits automatically opens in your editor.
 
+```
+┌─────────────────┐                    ┌─────────────────┐
+│   Claude Code   │ ── Edit file ───►  │     Neovim      │
+│   (terminal 1)  │                    │   (terminal 2)  │
+│                 │ ◄── Read buffer ── │                 │
+└─────────────────┘                    └─────────────────┘
+        │                                      ▲
+        │         PostToolUse hook             │
+        └──────── auto-opens file ─────────────┘
+```
+
 ## Features
 
 - **Auto-sync edits** - Files Claude edits instantly appear in Neovim
