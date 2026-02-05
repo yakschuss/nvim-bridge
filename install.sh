@@ -8,6 +8,7 @@ INSTALL_DIR="$HOME/.config/nvim-bridge"
 HOOKS_DIR="$HOME/.claude/hooks"
 SETTINGS_FILE="$HOME/.claude/settings.json"
 CLAUDE_CONFIG="$HOME/.claude.json"
+NVIM_PLUGIN_DIR="$HOME/.local/share/nvim/site/plugin"
 
 # Colors
 GREEN='\033[0;32m'
@@ -36,7 +37,12 @@ mkdir -p "$HOOKS_DIR"
 cp "$INSTALL_DIR/hooks/push-to-nvim.sh" "$HOOKS_DIR/"
 chmod +x "$HOOKS_DIR/push-to-nvim.sh"
 
-# 4. Update settings.json with hook config
+# 4. Install nvim plugin
+echo "Installing Neovim plugin..."
+mkdir -p "$NVIM_PLUGIN_DIR"
+cp "$INSTALL_DIR/plugin/nvim-bridge.lua" "$NVIM_PLUGIN_DIR/"
+
+# 5. Update settings.json with hook config
 echo "Configuring Claude Code hooks..."
 if [ -f "$SETTINGS_FILE" ]; then
   # Check if hooks already configured
@@ -82,7 +88,7 @@ else
 EOF
 fi
 
-# 5. Register MCP server with Claude Code
+# 6. Register MCP server with Claude Code
 echo "Registering MCP server..."
 if [ -f "$CLAUDE_CONFIG" ]; then
   if grep -q '"nvim-bridge"' "$CLAUDE_CONFIG" 2>/dev/null; then

@@ -30,25 +30,37 @@ Then restart Claude Code.
 
 ## Usage
 
-Start Neovim with a socket:
+Start Neovim with a socket (any unique name works):
 
 ```bash
-nvim --listen /tmp/nvim-$USER.sock myfile.py
+nvim --listen /tmp/nvim-$$.sock myfile.py
 ```
 
 Or add an alias to your shell config:
 
 ```bash
-alias vim='nvim --listen /tmp/nvim-$USER.sock'
+alias vim='nvim --listen /tmp/nvim-$$.sock'
 ```
 
-Now when Claude edits files, they automatically open in Neovim.
+The first nvim you open automatically becomes the "paired" instance. Claude's edits appear there.
+
+### Multiple Neovim Instances
+
+Open as many nvims as you want. Switch which one receives Claude's edits:
+
+```vim
+:ClaudePair     " Make THIS nvim receive Claude's edits
+:ClaudeStatus   " Check if this nvim is paired
+```
+
+The plugin auto-pairs the first nvim you open. After that, use `:ClaudePair` to switch.
 
 ## What gets installed
 
 | Location | Purpose |
 |----------|---------|
 | `~/.config/nvim-bridge/` | MCP server (Node.js) |
+| `~/.local/share/nvim/site/plugin/nvim-bridge.lua` | Neovim plugin (`:ClaudePair`) |
 | `~/.claude/hooks/push-to-nvim.sh` | Auto-push hook |
 | `~/.claude/settings.json` | Hook configuration |
 | `~/.claude.json` | MCP server registration |
@@ -78,6 +90,7 @@ The bridge exposes these tools to Claude:
 ```bash
 rm -rf ~/.config/nvim-bridge
 rm ~/.claude/hooks/push-to-nvim.sh
+rm ~/.local/share/nvim/site/plugin/nvim-bridge.lua
 # Manually remove the hook from ~/.claude/settings.json
 # Manually remove nvim-bridge from ~/.claude.json mcpServers
 ```
