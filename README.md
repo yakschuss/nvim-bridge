@@ -2,6 +2,8 @@
 
 Bidirectional bridge between [Claude Code](https://claude.ai/claude-code) and Neovim. Every file Claude edits automatically opens in your editor.
 
+![Demo](demo.gif)
+
 ```
 ┌─────────────────┐                    ┌─────────────────┐
 │   Claude Code   │ ── Edit file ───►  │     Neovim      │
