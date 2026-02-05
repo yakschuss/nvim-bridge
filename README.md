@@ -80,6 +80,38 @@ The bridge exposes these tools to Claude:
 | `nvim_execute` | Run Vim command or Lua code |
 | `nvim_status` | Check if Neovim is connected |
 
+## Why nvim-bridge?
+
+[claudecode.nvim](https://github.com/coder/claudecode.nvim) runs Claude *inside* Neovim as a split or floating window. It's a great project if you want an IDE-like experience where Neovim is the hub.
+
+nvim-bridge takes a different approach: **Claude and Neovim stay in separate terminals, loosely coupled.**
+
+```
+┌─────────────────────────────────────────────────┐
+│ tmux                                            │
+│  ┌──────────────┐  ┌──────────────┐  ┌────────┐│
+│  │    Neovim    │  │  Claude Code │  │  bash  ││
+│  │              │  │              │  │        ││
+│  │  (edits     ◄───  (edits      │  │ (tests,││
+│  │   appear     │  │   files)     │  │  git,  ││
+│  │   here)      │  │              │  │  etc)  ││
+│  └──────────────┘  └──────────────┘  └────────┘│
+└─────────────────────────────────────────────────┘
+```
+
+This is for people who live in tmux - jumping between panes, opening and closing them reflexively. You don't want Claude shoved inside your editor. You want them side by side, each in their own pane, doing their own thing.
+
+| | **nvim-bridge** | **claudecode.nvim** |
+|---|---|---|
+| Where Claude runs | Its own terminal | Inside Neovim |
+| Workflow | tmux panes | Neovim splits |
+| Coupling | Loose - socket | Tight - WebSocket |
+| Complexity | ~300 lines | Full IDE integration |
+| Selection tracking | No (just ask Claude) | Yes |
+| Diff review | No - file just opens | Native diff pane |
+
+Both are valid. Pick the one that matches how you work.
+
 ## Requirements
 
 - Node.js 18+
