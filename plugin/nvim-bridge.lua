@@ -3,6 +3,7 @@
 --
 -- Commands:
 --   :ClaudePair    - Make this nvim receive Claude's edits
+--   :ClaudeUnpair  - Stop receiving Claude's edits
 --   :ClaudeStatus  - Check if this nvim is paired
 
 local M = {}
@@ -26,6 +27,22 @@ vim.api.nvim_create_user_command('ClaudePair', function()
     vim.notify('Failed to create socket link', vim.log.levels.ERROR)
   end
 end, { desc = 'Make this nvim receive Claude edits' })
+
+vim.api.nvim_create_user_command('ClaudeUnpair', function()
+  -- Check if this nvim is actually the paired one
+  local socket = vim.v.servername
+  local f = io.popen('readlink "' .. socket_link .. '" 2>/dev/null')
+  local target = f and f:read('*a'):gsub('%s+$', '') or ''
+  if f then f:close() end
+
+  if socket ~= '' and socket ~= target then
+    vim.notify('This nvim is not paired', vim.log.levels.WARN)
+    return
+  end
+
+  os.remove(socket_link)
+  vim.notify('✓ Unpaired - Claude edits will not push to any nvim', vim.log.levels.INFO)
+end, { desc = 'Stop receiving Claude edits' })
 
 vim.api.nvim_create_user_command('ClaudeStatus', function()
   local socket = vim.v.servername
